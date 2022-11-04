@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name=" TestNG Test Run">
+  <test name="test">
+    <classes>
+    <class name="Xendit.Automation"/>        
+    </classes>
+  </test>
+</suite>	
