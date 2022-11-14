@@ -1,5 +1,7 @@
 package Regression;
 
+import org.openqa.selenium.By;
+
 import utility.Constant;
 import utility.Control;
 import utility.Generic;
@@ -14,17 +16,24 @@ public static void test() throws Exception {
 		
 		
 //-------------------------------------------BEECEPTOR------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-				
+		
+//-------------------------------------------ENDPOINT CREATION------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
 	if (System.getProperty("API").equalsIgnoreCase("EndpointCreation")){
 		XenditFunction.EndpointCreation(System.getProperty("Endpoint"));	
  	}
+	
+//-------------------------------------------EWALLET PROCEED TO PAY------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
 	
 	else if (System.getProperty("API").equalsIgnoreCase("EWalletProceedToPay")){
 		XenditFunction.eWalletProceedtoPay(System.getProperty("PaymentID"),System.getProperty("Status"),System.getProperty("Description"));
 		Constant.driver.close();
 	}
 		
-//----------------------------------------------XENDIT DASHBOARD-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------XENDIT DASHBOARD-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+//-------------------------------------------XENDITDASHBOARDVALIDATION------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 	else if (System.getProperty("API").equalsIgnoreCase("XenditDashboardValidation")){
 		Control.OpenApplication("Chrome", Generic.ReadFromExcel("XenditDashboard", "TestData", 1), "XenditDashboard");
@@ -37,12 +46,14 @@ public static void test() throws Exception {
 		Control.WaitForLoader(3,3000);
 		XenditFunction.XenditDashlogin();
 		Control.WaitForLoader(3,3000);
-		XenditFunction.XenditDashTransactionValidation(System.getProperty("PaymentID"),System.getProperty("Status"),System.getProperty("Account"),System.getProperty("PaymentType"),System.getProperty("PaymentChannel"),System.getProperty("PaymentAmount"),System.getProperty("TransDate"));
+		XenditFunction.XenditDashTransactionValidation(System.getProperty("PaymentID"),System.getProperty("Status"),System.getProperty("Account"),System.getProperty("PaymentType"),System.getProperty("PaymentChannel"),System.getProperty("TransAmount"),System.getProperty("TransDate"));
 		Constant.driver.close();
 				
 		}
 		
-//----------------------------------------------GLOBE PAYMENT SERVICE - REPORTS--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------GLOBE PAYMENT SERVICE - REPORTS--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		
+//-------------------------------------------TRANSACTION LOGS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 		
 	else if (System.getProperty("API").equalsIgnoreCase("TransactionLogs")) {
 		Control.OpenApplication("Chrome", Generic.ReadFromExcel("GlobePaymentService", "TestData", 1), "GlobePaymentService");
@@ -56,6 +67,8 @@ public static void test() throws Exception {
 		Constant.driver.close();
 	}
 		
+//-------------------------------------------PREPAID REPORTS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 	else if (System.getProperty("API").equalsIgnoreCase("PrepaidReports")) {
 		Control.OpenApplication("Chrome", Generic.ReadFromExcel("GlobePaymentService", "TestData", 1), "GlobePaymentService");
 		Control.WaitForLoader(3,3000);
@@ -67,12 +80,34 @@ public static void test() throws Exception {
 		Control.WaitForLoader(3,3000);
 		XenditFunction.ChannelTransactionsValidation(System.getProperty("TransType"), System.getProperty("ChannelName"));
 		Control.WaitForLoader(3,3000);
-		for(int i=0;i<9;i++) {
+		for(int i=0;i<=10;i++) {
 		Thread.sleep(100000);
-		System.out.println("Waiting for OR Report");}
+		System.out.println("Waiting for OR Report");
+		Constant.driver.findElement(By.xpath("(//div[contains(text(),'Channel Transactions')])[1]"));
+		}
 		XenditFunction.existbrowseropen("GlobePaymentService");
 		Control.WaitForLoader(3,3000);
 		XenditFunction.ORReportValidation(System.getProperty("PaymentID"), System.getProperty("Date"), System.getProperty("ChannelName"), System.getProperty("Amount"), System.getProperty("PaymentGateway"), System.getProperty("Status"), System.getProperty("MobileNumber"), System.getProperty("ProductName"));
+		Constant.driver.close();
+	}
+	
+//-------------------------------------------POSTPAID REPORTS------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	
+	else if (System.getProperty("API").equalsIgnoreCase("PostpaidReports")) {
+		Control.OpenApplication("Chrome", Generic.ReadFromExcel("GlobePaymentService", "TestData", 1), "GlobePaymentService");
+		Control.WaitForLoader(3,3000);
+		XenditFunction.GlobePaymentServicelogin();
+		Control.WaitForLoader(3,3000);
+		Control.click("GlobePaymentService", "Reports");
+		Control.WaitForLoader(3,3000);
+		XenditFunction.TransactionLogsValidation(System.getProperty("PaymentID"), System.getProperty("AccountNo"), System.getProperty("ChannelName"), System.getProperty("EmailAddress"),  System.getProperty("PaymentMethod"), System.getProperty("MobileNumber"), System.getProperty("Status"), System.getProperty("Refund"), System.getProperty("RefundAmount"), System.getProperty("RefundStatus"),  System.getProperty("Amount"),  System.getProperty("Date"),  System.getProperty("PaymentGateway"));
+		Control.WaitForLoader(3,3000);
+		XenditFunction.ChannelTransactionsValidation(System.getProperty("TransType"), System.getProperty("ChannelName"));
+		Control.WaitForLoader(3,3000);
+		XenditFunction.GatewayOnlineReportValidation(System.getProperty("PaymentID"), System.getProperty("AccountNo"), System.getProperty("ChannelName"), System.getProperty("PaymentMethod"), System.getProperty("MobileNumber"), System.getProperty("Amount"), System.getProperty("Status"), System.getProperty("PaymentGateway"));
+		Control.WaitForLoader(3,3000);
+		XenditFunction.RevenueAccountingReportValidation(System.getProperty("PaymentID"), System.getProperty("AccountNo"), System.getProperty("PaymentMethod"),System.getProperty("Status"),System.getProperty("Refund"),System.getProperty("RefundAmount"),System.getProperty("RefundStatus"),System.getProperty("Amount"),System.getProperty("Date"));
 		Constant.driver.close();
 	}
 		

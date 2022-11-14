@@ -22,10 +22,12 @@ import org.testng.annotations.BeforeClass;
 //import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import Regression.RegressionCCDC;
 import Regression.RegressionEWallet;
 import Regression.RegressionGcashAdyen;
 import Sprint1.*;
 import Sprint6.*;
+import Sprint8.CCDC;
 import XenditWebFlow.WebValidation;
 import utility.Constant;
 import utility.Control;
@@ -46,17 +48,17 @@ public class Automation {
 	@Test
 	public  void main() throws Exception {
 	
-			CXSApi.test();
-		
-		//RegressionGcashAdyen.test();;
-		
-		
-		//RegressionEWallet.test();
+	//	CXSApi.test();
+		RegressionGcashAdyen.test();;
+	//	RegressionEWallet.test();
 	
 		
+		//RegressionCCDC.test();
 		
+	//CCDC.test();
 
-	}	
+				
+	}			
 		
 		
 	
