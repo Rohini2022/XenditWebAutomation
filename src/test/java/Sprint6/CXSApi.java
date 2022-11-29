@@ -62,11 +62,11 @@ public static void test() throws Exception {
 		Control.WaitForLoader(3,3000);
 		XenditFunction.ChannelTransactionsValidation(System.getProperty("TransType"), System.getProperty("ChannelName"));
 		Control.WaitForLoader(3,3000);
-		for(int i=0;i<=10;i++) {
-		Thread.sleep(100000);
-		System.out.println("Waiting for OR Report");
-		Constant.driver.findElement(By.xpath("(//div[contains(text(),'Channel Transactions')])[1]"));
-		}
+//		for(int i=0;i<10;i++) {
+//		Thread.sleep(100000);
+//		System.out.println("Waiting for OR Report");
+//		Constant.driver.findElement(By.xpath("(//div[contains(text(),'Channel Transactions')])[1]"));
+//		}
 		XenditFunction.existbrowseropen("GlobePaymentService");
 		Control.WaitForLoader(3,3000);
 		XenditFunction.ORReportValidation(System.getProperty("PaymentID"), System.getProperty("Date"), System.getProperty("ChannelName"), System.getProperty("Amount"), System.getProperty("PaymentGateway"), System.getProperty("Status"), System.getProperty("MobileNumber"), System.getProperty("ProductName"));

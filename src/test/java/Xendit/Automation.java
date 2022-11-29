@@ -49,13 +49,21 @@ public class Automation {
 	public  void main() throws Exception {
 	
 	//	CXSApi.test();
-		RegressionGcashAdyen.test();;
-	//	RegressionEWallet.test();
 	
+	//	RegressionGcashAdyen.test();
+		
+	//	RegressionEWallet.test();
 		
 		//RegressionCCDC.test();
 		
-	//CCDC.test();
+	CCDC.test();
+	
+	
+//		
+//		Control.OpenApplication("Chrome", Generic.ReadFromExcel("GlobePaymentService", "TestData", 1), "GlobePaymentService");
+//		Control.WaitForLoader(3,500);
+//		XenditFunction.GlobePaymentServicelogin();
+//		Control.WaitForLoader(3,500);
 
 				
 	}			

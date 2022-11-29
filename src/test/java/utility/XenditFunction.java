@@ -305,14 +305,14 @@ public class XenditFunction {
 	Control.WaitForLoader(3,500);
 	Constant.driver.switchTo().frame("sample-inline-frame");
 	Control.WaitForLoader(3,500);
-	WebDriverWait wait = new WebDriverWait(Constant.driver, 1000);
+	WebDriverWait wait = new WebDriverWait(Constant.driver, 5000);
 	wait.until(ExpectedConditions.invisibilityOfAllElements(Constant.driver.findElements(By.xpath("//div[@id='loader-wrapper']"))));
-    Control.WaitForLoader(3,5000);
+    Control.WaitForLoader(3,8000);
     Thread.sleep(6000);
     Constant.driver.switchTo().defaultContent();
     Control.FluentWait_function("Tokenize","Response");
 	Control.ScrollToView("Tokenize","Response");
-	Thread.sleep(3000);
+	Thread.sleep(10000);
 	Control.WaitForLoader(3,300);
 	String Message = Constant.driver.findElement(By.xpath("//div[@id='success']/p")).getText();
 	System.out.println("Message "+Message);
@@ -1112,7 +1112,7 @@ public class XenditFunction {
 	if(BillType.equalsIgnoreCase("NonBill")) {
 		CardNumber = "5577 8100 0000 0004"; ExpDate ="10/33"; CVC ="123";}
 	if(BillType.equalsIgnoreCase("Bill")) {
-		CardNumber = "5577 8100 0000 0004"; ExpDate ="10/33"; CVC ="123";}
+		CardNumber = "3569 9900 1009 5833"; ExpDate ="03/30"; CVC ="737";}
 	if(BillType.equalsIgnoreCase("l")) {
 		CardNumber = "4199 3500 0000 0002"; ExpDate ="03/30"; CVC ="737";}
 	Control.ScrollToView("GlobePaymentService", "HolderName");
@@ -1144,8 +1144,11 @@ public class XenditFunction {
 	Control.takeScreenshot();
 	String CapturedDate = CaptureDateTime("MM/dd/yyyy - hh:mm:ss aa");
 	System.out.println("[StoreForAPIPro]CapturedPaymentDate::"+CapturedDate);
+	Control.takeScreenshot();
 	Control.click("GlobePaymentService", "AlertGoBackCheckout");
 	Thread.sleep(3000);
+	Control.takeScreenshot();
+	Thread.sleep(300000);
 	Constant.driver.close();
 	Thread.sleep(5000);
 	existbrowseropen("Beeceptor");
